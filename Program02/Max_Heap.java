@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Max_Heap {
@@ -19,28 +20,104 @@ public class Max_Heap {
 
             maxSize = size;
             arr = new int[size];
+            Arrays.fill(arr, Integer.MIN_VALUE);
             this.size = 0;
         }
 
         private int parent(int i){return ((i-1)/2);}
 
-        private int leftChild(int i){return (2*i + 1);}
+        private int leftChild(int i){return (2*i + 1) ;}
 
-        private int rightChild(int i){return (2*i + 2);}
+        private int rightChild(int i){return (2*i + 2 );}
 
         private void swap(int a, int b){
 
-            int temp = a;
-            a = b;
-            b = temp;
+            int temp;
+            temp = arr[a];
+            arr[a] = arr[b];
+            arr[b] = temp;
         }
 
         public void insert(int data){
 
+
             arr[size] = data;
             size++;
+            int i = size-1;
+            while (i != 0 && arr[i] > arr[parent(i)]){
+
+                swap( i, parent(i));
+                i = parent(size);
+            }
+            heapify(0);
 
         }
+
+
+        public int delete(){
+
+            int returnInt = arr[0];
+            size--;
+            arr[0] = arr[size];
+            arr[size] = Integer.MIN_VALUE;
+            heapify(0);
+
+            return  returnInt;
+
+        }
+
+        private void heapify(int i){
+
+
+            if (i >= ((size) / 2) && i <= size ){
+                return;
+            }
+            int left = leftChild(i);
+            int right = rightChild(i);
+
+            if (arr[i] < arr[left]){
+                swap(i, left);
+                heapify(0);
+            }
+
+            if (arr[left] < arr[right]){
+
+                swap(left, right);
+                heapify(0);
+            }
+            heapify(i + 1);
+
+        }
+
+
+        public void print() {
+
+            for (int i = 0; i < size; i++) {
+                System.out.print(arr[i] + " ");
+            }
+        }
+
+
+        public void preOrder(int i){
+
+
+            System.out.print(arr[i] + " ");
+            if (i >= ((size) / 2) && i <= size) return;
+            preOrder(leftChild(i));
+            preOrder(rightChild(i));
+
+
+        }
+
+        public void postOrder(int i){
+
+
+        }
+
+
+
+
+
 
     }
 
@@ -100,6 +177,7 @@ public class Max_Heap {
 
                 }else if (arrstring3[i].equals("del")) {
 
+                    maxHeep.delete();
                 } else if (arrstring3[i].equals("pre")) {
 
                 } else if (arrstring3[i].equals("post")) {
@@ -107,5 +185,6 @@ public class Max_Heap {
                 }
             }
         }
+        maxHeep.preOrder(0);
     }
 }
