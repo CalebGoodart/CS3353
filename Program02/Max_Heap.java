@@ -101,7 +101,7 @@ public class Max_Heap {
         public void preOrder(int i){
 
 
-            System.out.print(arr[i] + " ");
+            if (i != size) System.out.print(arr[i] + " ");
             if (i >= ((size) / 2) && i <= size) return;
             preOrder(leftChild(i));
             preOrder(rightChild(i));
@@ -111,9 +111,29 @@ public class Max_Heap {
 
         public void postOrder(int i){
 
+            if (i >= ((size) / 2) && i <= size) {
+                if (i != size) System.out.print(arr[i] + " ");
+                return;
+            }
+            postOrder(leftChild(i));
+            System.out.print(arr[i] + " ");
+            postOrder(rightChild(i));
+
 
         }
 
+        public void inOrder(int i){
+
+            if (i >= ((size) / 2) && i <= size) {
+                if (i != size) System.out.print(arr[i] + " ");
+                return;
+            }
+
+            inOrder(leftChild(i));
+            System.out.print(arr[i] + " ");
+            inOrder(rightChild(i));
+
+        }
 
 
 
@@ -173,18 +193,25 @@ public class Max_Heap {
             for (int i = 0; i < arrstring3.length; ++i) {
                 if (arrstring3[i].equals("in")) {
 
-                    maxHeep.insert(Integer.parseInt(arrstring3[i-1]));
+                    if (arrstring3[0].equals("in")){
+                        maxHeep.inOrder(0);
+                    }else {
+                        maxHeep.insert(Integer.parseInt(arrstring3[i - 1]));
+                    }
 
                 }else if (arrstring3[i].equals("del")) {
 
                     maxHeep.delete();
                 } else if (arrstring3[i].equals("pre")) {
 
+                    maxHeep.preOrder(0);
+                    System.out.print("\n");
                 } else if (arrstring3[i].equals("post")) {
 
+                    maxHeep.postOrder(0);
+                    System.out.print("\n");
                 }
             }
         }
-        maxHeep.preOrder(0);
     }
 }

@@ -44,7 +44,7 @@ public class CPU_Jobs {
 
         PriorityQueue<String[]> priorityQueue = new PriorityQueue<>(new sort());
 
-        ArrayList<String[]> list = new ArrayList<>();
+
         int cycle = 1;
         while (true) {
 
@@ -52,7 +52,7 @@ public class CPU_Jobs {
             for (String[] job : jobs) {
                 if (Integer.parseInt(job[1]) == cycle-1) {
                     System.out.println(job[0] + " has Arrived");
-                    list.add(job);
+
                     priorityQueue.add(job);
                 }
             }
@@ -60,6 +60,11 @@ public class CPU_Jobs {
             if (priorityQueue.peek() == null){
 
                 System.out.println("No Jobs!");
+
+                System.out.println("Out of jobs press anything to quit!");
+                String input = scanner.next();
+                    System.exit(0);
+
             }else{
 
                 System.out.print("Executing" );
@@ -68,11 +73,11 @@ public class CPU_Jobs {
                     System.out.print(" " + str);
                 }
 
-                Collections.sort(list, new sort());
+
                 priorityQueue.peek()[3] = Integer.toString(Integer.parseInt(priorityQueue.peek()[3]) - 1);
 
                 if (priorityQueue.peek()[3].equals("0")){
-                    list.remove(0);
+
                     priorityQueue.poll();
 
                 }
