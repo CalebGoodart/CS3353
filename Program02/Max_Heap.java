@@ -40,19 +40,18 @@ public class Max_Heap {
 
         public void insert(int data){
 
-
             arr[size] = data;
             size++;
             int i = size-1;
+
             while (i != 0 && arr[i] > arr[parent(i)]){
 
                 swap( i, parent(i));
                 i = parent(size);
             }
+
             heapify(0);
-
         }
-
 
         public int delete(){
 
@@ -63,15 +62,14 @@ public class Max_Heap {
             heapify(0);
 
             return  returnInt;
-
         }
 
         private void heapify(int i){
 
-
             if (i >= ((size) / 2) && i <= size ){
                 return;
             }
+
             int left = leftChild(i);
             int right = rightChild(i);
 
@@ -81,12 +79,10 @@ public class Max_Heap {
             }
 
             if (arr[left] < arr[right]){
-
                 swap(left, right);
                 heapify(0);
             }
             heapify(i + 1);
-
         }
 
 
@@ -97,16 +93,12 @@ public class Max_Heap {
             }
         }
 
-
         public void preOrder(int i){
-
 
             if (i != size) System.out.print(arr[i] + " ");
             if (i >= ((size) / 2) && i <= size) return;
             preOrder(leftChild(i));
             preOrder(rightChild(i));
-
-
         }
 
         public void postOrder(int i){
@@ -115,11 +107,10 @@ public class Max_Heap {
                 if (i != size) System.out.print(arr[i] + " ");
                 return;
             }
+
             postOrder(leftChild(i));
             System.out.print(arr[i] + " ");
             postOrder(rightChild(i));
-
-
         }
 
         public void inOrder(int i){
@@ -132,14 +123,9 @@ public class Max_Heap {
             inOrder(leftChild(i));
             System.out.print(arr[i] + " ");
             inOrder(rightChild(i));
-
         }
-
-
-
-
-
     }
+
 
     public static void main(String[] args) {
 
@@ -171,7 +157,6 @@ public class Max_Heap {
         System.out.println("THe data after:");
         String[] arrstring2 = stringBuilder.toString().split(" ");
         ArrayList<String[]> arrayList = new ArrayList<>();
-
 
         for (String string3 : arrstring2) {
             arrayList.add(string3.split("\\."));
